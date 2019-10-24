@@ -1,0 +1,33 @@
+body {
+    background-color: white;
+    box-sizing: border-box;
+}
+
+#center-stage {
+    height: 350px;
+}
+
+.card {
+    height: 100%;
+    position: relative;
+}
+
+.card-text {
+    position: absolute;
+    bottom: 20px;
+}
+
+#chat-box {
+    height: 200px;
+}
+
+.chat-text {
+    margin-bottom: .10rem;
+}
+
+#chat-border {
+    height: 180px;
+    border: 1px solid #6c757d;
+    border-radius: .25rem;
+    overflow-y: scroll;
+}
