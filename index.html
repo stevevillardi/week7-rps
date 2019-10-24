@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
-    <title>Firebase - Demo</title>
+    <title>Rock, Paper, Scissors!</title>
 </head>
 <body>
 
@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <h1 class="mt-4">Welcome to Rock, Paper, Scissors!</h1>
-                <h3 class="mb-4">Please enter a name to begin:</h3>
+                <h3 class="mb-4" id="turn-status">Please enter a name to begin:</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="Enter Player Name...">
+                    <input type="text" class="form-control" id="submit-name" placeholder="Enter Player Name...">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Submit</button>
+                        <button class="btn btn-outline-secondary" type="button" id="submit-player">Submit</button>
                     </div>
                 </div>
             </div>
@@ -34,31 +34,51 @@
         <div class="row mt-4" id="center-stage">
             <div class="col-sm-4 ml-sm-auto">
                 <div class="card border-primary mb-2">
-                    <div class="card-header" id="player-one-name">Waiting for player...</div>
-                    <div class="card-body text-primary">
-                        <h5 class="card-title">Rock</h5>
-                        <h5 class="card-title">Paper</h5>
-                        <h5 class="card-title">Scissor</h5>
-                        <p class="card-text">Wins: <span id="player-one-wins">0</span> Loses: <span id="player-one-loses">0</span></p>
+                    <div class="card-header text-center" id="player-one-name">Waiting for player...</div>
+                    <div class="card-body text-primary text-center">
+                        <button class="btn btn-primary btn-lg btn-block player-one-choices" data-choice="rock"><i class="far fa-hand-rock"></i> Rock</button>
+                        <button class="btn btn-primary btn-lg btn-block player-one-choices" data-choice="paper"><i class="far fa-hand-paper"></i> Paper</button>
+                        <button class="btn btn-primary btn-lg btn-block player-one-choices" data-choice="scissors"><i class="far fa-hand-scissors"></i> Scissor</button>
+                        <p class="card-text">Wins: <span id="player-one-wins">0</span> Loses: <span id="player-one-loses">0</span> Ties: <span class="tie-games">0</span></p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4 ml-sm-auto">
                 <div class="card border-secondary mb-2">
-                    <div class="card-header"id="action-name">Rock, Paper, Scissors!</div>
-                    <div class="card-body text-secondary">
-                        
+                    <div class="card-header text-center" id="action-name">Rock, Paper, Scissors!</div>
+                    <div class="card-body text-secondary" id="action-body">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <h5 class="card-title" id="player-one-choice"></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <h5 class="card-title" id="player-two-choice"></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <h5 class="card-title" id="game-result"></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <h5 class="card-title" id="game-restart"></h5>
+                                </div>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="col-sm-4 ml-sm-auto" id="player-two">
                 <div class="card border-success mb-3">
-                    <div class="card-header" id="player-two-name">Waiting for player...</div>
-                    <div class="card-body text-success">
-                        <h5 class="card-title">Rock</h5>
-                        <h5 class="card-title">Paper</h5>
-                        <h5 class="card-title">Scissor</h5>
-                        <p class="card-text">Wins: <span id="player-two-wins">0</span> Loses: <span id="player-two-loses">0</span></p>
+                    <div class="card-header text-center" id="player-two-name">Waiting for player...</div>
+                    <div class="card-body text-success text-center">
+                            <button class="btn btn-success btn-lg btn-block player-two-choices" data-choice="rock"><i class="far fa-hand-rock"></i> Rock</button>
+                            <button class="btn btn-success btn-lg btn-block player-two-choices" data-choice="paper"><i class="far fa-hand-paper"></i> Paper</button>
+                            <button class="btn btn-success btn-lg btn-block player-two-choices" data-choice="scissors"><i class="far fa-hand-scissors"></i> Scissor</button>
+                        <p class="card-text">Wins: <span id="player-two-wins">0</span> Loses: <span id="player-two-loses">0</span> Ties: <span class="tie-games">0</span></p>
                     </div>
                 </div>
             </div>
@@ -75,34 +95,14 @@
             <div class="col-sm-6" id="chat-box">
                 <div class="row">
                     <div class="col-sm-12 pt-2" id="chat-border">
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
-                        <p class="chat-text"><span class="badge badge-primary">Player-1:  </span>Hello!</p>
-                        <p class="chat-text"><span class="badge badge-success">Player-2:  </span>Lets Play!</p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm-12 px-0">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Enter Message...">
+                            <input type="text" id="chat-textbox" class="form-control" placeholder="Enter Message...">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Send</button>
+                                <button class="btn btn-outline-secondary" type="button" id="chat-button">Send</button>
                             </div>
                         </div>
                     </div>
@@ -114,6 +114,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/95ef3cb346.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
